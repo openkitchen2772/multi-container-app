@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t openkitchen2772/fib-client -f Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true openkitchen2772/fib-client npm test
+
+after_success:
+  - docker build -t openkitchen2772/fib-client ./client
+  - docker build -t openkitchen2772/fib-nginx ./nginx
+  - docker build -t openkitchen2772/fib-api ./api
+  - docker build -t openkitchen2772/fib-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_ID --password-stdin
+  - docker push openkitchen2772/fib-client
+  - docker push openkitchen2772/fib-nginx
+  - docker push openkitchen2772/fib-api
+  - docker push openkitchen2772/fib-worker
