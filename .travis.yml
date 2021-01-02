@@ -18,3 +18,15 @@ after_success:
   - docker push william2772/fib-nginx
   - docker push william2772/fib-api
   - docker push william2772/fib-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: docker-fib-calulator-app
+  env: DockerFibCalulatorApp-env
+  bucket_name: elasticbeanstalk-us-east-2-571983945258
+  bucket_path: docker-fib-calulator-app
+  on:
+    branch: master
+  access_key_id: $FIB_AWS_ACCESS_KEY
+  secret_access_key: $FIB_SECRET_ACCESS_KEY
