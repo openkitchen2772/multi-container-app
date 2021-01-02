@@ -3,27 +3,27 @@
     "containerDefinitions": [
         {
             "name": "client",
-            "image": "william2772/fbi-client",
+            "image": "william2772/fib-client",
             "hostname": "client",
             "essential": false,
             "memory": 128
         },
         {
             "name": "api",
-            "image": "william2772/fbi-api",
+            "image": "william2772/fib-api",
             "hostname": "api",
             "essential": false,
             "memory": 128
         },
         {
             "name": "worker",
-            "image": "william2772/fbi-worker",
+            "image": "william2772/fib-worker",
             "essential": false,
             "memory": 128
         },
         {
             "name": "nginx",
-            "image": "william2772/fbi-nginx",
+            "image": "william2772/fib-nginx",
             "essential": true,
             "memory": 128,
             "portMappings": [
