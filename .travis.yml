@@ -22,10 +22,10 @@ after_success:
 deploy:
   provider: elasticbeanstalk
   region: us-east-2
-  app: docker-fib-calulator-app
-  env: DockerFibCalulatorApp-env
+  app: multi-container-fib-calulator-app
+  env: MultiContainerFibCalulatorApp-env
   bucket_name: elasticbeanstalk-us-east-2-571983945258
-  bucket_path: docker-fib-calulator-app
+  bucket_path: multi-container-fib-calulator-app
   on:
     branch: master
   access_key_id: $FIB_AWS_ACCESS_KEY
