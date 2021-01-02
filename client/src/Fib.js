@@ -53,8 +53,13 @@ class Fib extends Component {
             index: this.state.index
         });
 
-        if (!res.working) {
-            this.setState({message: res.message});
+        console.log(res.data);
+        
+        if (!res.data.working) {
+            this.setState({message: res.data.message});
+        }
+        else {
+            this.setState({message: ''});
         }
 
         this.setState({index: ''});
@@ -67,7 +72,7 @@ class Fib extends Component {
             <div>
                 <form onSubmit={this.onIndexSubmitHandler}>
                     <label>Enter your index:</label>
-                    <input 
+                    <input
                         style={{ margin: "0px 10px 0px 10px" }}
                         value={this.state.index}
                         onChange={this.onIndexChangeHandler}/>
