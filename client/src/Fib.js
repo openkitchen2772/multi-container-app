@@ -5,7 +5,8 @@ class Fib extends Component {
     state = {
         seenIndexes: [],
         values: {},
-        index: ''
+        index: '',
+        message: ''
     }
 
     componentDidMount () {
@@ -48,9 +49,14 @@ class Fib extends Component {
     onIndexSubmitHandler = async (event) => {
         event.preventDefault();
 
-        await axios.post("/api/values", {
+        const res = await axios.post("/api/values", {
             index: this.state.index
         });
+
+        if (!res.working) {
+            this.setState({message: res.message});
+        }
+
         this.setState({index: ''});
         this.fetchValues();
         this.fetchIndexes();
@@ -66,6 +72,7 @@ class Fib extends Component {
                         value={this.state.index}
                         onChange={this.onIndexChangeHandler}/>
                     <button className="App-submit-button">Submit</button>
+                    <p>{this.state.message}</p>
                 </form>
 
                 <h3>Indexes I have seen:</h3>

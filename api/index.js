@@ -55,15 +55,19 @@ app.get("/values/current", async (req, res) => {
 app.post("/values", async (req, res) => {
     const index = req.body.index;
 
+    if (Number.isInteger(index)) {
+        res.send({working: false, message: "Index should be a number!"})
+    }
+
     if (parseInt(index) > 40 ) {
-        res.send("Index too high!");
+        res.send({working: false, message: "Index too high!"});
     }
 
     redisClient.hset("values", index, "Nothing yet!");
     redisPublisher.publish("insert", index);
     pgClient.query("INSERT INTO values(number) VALUES ($1)", [index]);
     
-    res.send({working: true});
+    res.send({working: true, message: ""});
 })
 
 app.listen(5000, err => {
